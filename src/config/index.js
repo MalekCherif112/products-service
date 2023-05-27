@@ -1,6 +1,11 @@
-const dotEnv= require("dotenv").
-config({path: process.env.NODE_ENV!== 'prod' && 
-"C:\\Users\\cheri\\Desktop\\Microservices\\nodejs_microservice-master\\products\\.env"})
+const path = require('path');
+const dotEnv = require('dotenv');
+
+const envPath = process.env.NODE_ENV !== 'prod' &&
+  path.resolve(__dirname, '../../.env')
+
+  
+dotEnv.config({path: envPath})
 
 module.exports = {
 
