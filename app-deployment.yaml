@@ -17,7 +17,7 @@ spec:
       containers:
         - name: products
           image: malekinsat/products-service:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8002 # The port that the container is running on in the cluster
           envFrom:
