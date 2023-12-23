@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: products-deployment
+  labels:
+    app: products
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: products
+  template:
+    metadata:
+      labels:
+        app: products
+    spec:
+      containers:
+        - name: products
+          image: malekinsat/products-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8002 # The port that the container is running on in the cluster
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: products-service
+spec:
+  selector:
+    app: products
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 5001 # The port that the service is running on in the cluster
+      targetPort: 8002 # The port exposed by the service # Forwards to container's port
+
+      
